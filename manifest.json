@@ -1,0 +1,28 @@
+{
+  "name": "你来比划我来猜",
+  "short_name": "你比我猜",
+  "description": "线下聚会动作猜词游戏",
+  "id": "?id=nibiwocai",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000",
+  "background_color": "#efefef",
+  "icons": [
+    {
+      "src": "https://lsong.org/icon-x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://lsong.org/icon-x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": [
+    "web",
+    "game"
+  ]
+}
