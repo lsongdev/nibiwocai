@@ -59,8 +59,7 @@ const Game = ({ config }) => {
     h('div', { className: 'panel-body' }, [
       h('b', { className: "game-word" }, word),
     ]),
-    h('div', { className: 'panel-footer' }, [
-
+    h('div', { className: 'panel-footer button-group' }, [
       h('button', { className: 'button button-success', onClick: handleCorrect }, '正确'),
       h('button', { className: 'button button-danger', onClick: handleSkip }, '跳过'),
     ])
