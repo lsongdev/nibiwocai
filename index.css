@@ -1,7 +1,5 @@
 @import url(https://lsong.org/css/stylesheet.css);
-@import url(https://lsong.org/stylesheets/panel.css);
 @import url(https://lsong.org/stylesheets/button.css);
-
 
 .panel {
   margin: 0;
@@ -22,8 +20,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 6rem;
 }
 
+.panel-footer {
+  display: flex;
+  padding-bottom: 2rem;
+  justify-content: center;
+  gap: 1rem;
+}
 .game-word {
   font-size: 15vw;  
 }
@@ -49,13 +54,4 @@
     display: none !important;
   }
 
-  .panel-body {
-    padding-bottom: 6rem;
-  }
-
-  .panel-footer {
-    padding-bottom: 2rem;
-    justify-content: center;
-    gap: 1rem;
-  }
 }
