@@ -11,6 +11,12 @@ const loadData = async name => {
   return shuffle(data);
 };
 
+const formatTime = s => {
+  const m = Math.floor(s / 60);
+  const sec = s % 60;
+  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+};
+
 const Game = ({ config }) => {
   const { time, dict: dictName } = config;
   const [word, setWord] = useState('');
@@ -19,13 +25,18 @@ const Game = ({ config }) => {
   const [t, setTime] = useState(time);
   const words = useRef();
   const intervalRef = useRef();
+  const wakeLockRef = useRef();
   const init = async () => {
     words.current = await loadData(dictName);
     setWord(words.current[0]);
     intervalRef.current = setInterval(() => {
       setTime(t => t - 1);
     }, 1000);
-    return () => clearInterval(intervalRef.current);
+    try {
+      wakeLockRef.current = await navigator.wakeLock.request('screen');
+    } catch (e) {
+      console.warn('Wake Lock not supported');
+    }
   };
   const next = useThrottle((isCorrect = false) => {
     const { current: arr } = words;
@@ -48,12 +59,16 @@ const Game = ({ config }) => {
         handleCorrect();
       }
     });
-    return cancel;
+    return () => {
+      cancel();
+      clearInterval(intervalRef.current);
+      wakeLockRef.current?.release();
+    };
   }, []);
   return h('div', { className: 'panel' }, [
     h('h2', { className: 'panel-header' }, [
       h('span', null, "你比我猜"),
-      h('small', null, t),
+      h('small', null, formatTime(t)),
       h('small', null, `${o}/${n}`),
     ]),
     h('div', { className: 'panel-body' }, [

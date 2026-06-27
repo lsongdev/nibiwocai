@@ -7,6 +7,8 @@
   margin: 0;
   height: 100%;
   text-align: center;
+  display: flex;
+  flex-direction: column;
   --border-color: #fff;
 }
 
@@ -45,5 +47,13 @@
   #hello,
   #subscribe {
     display: none !important;
+  }
+
+  .panel-body {
+    padding-bottom: 6rem;
+  }
+
+  .panel-footer {
+    padding-bottom: 2rem;
   }
 }
