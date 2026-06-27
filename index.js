@@ -12,8 +12,9 @@ const loadData = async name => {
 };
 
 const formatTime = s => {
-  const m = Math.floor(s / 60);
-  const sec = s % 60;
+  const t = Math.max(0, s);
+  const m = Math.floor(t / 60);
+  const sec = t % 60;
   return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
 };
 
@@ -74,7 +75,7 @@ const Game = ({ config }) => {
     h('div', { className: 'panel-body' }, [
       h('b', { className: "game-word" }, word),
     ]),
-    h('div', { className: 'panel-footer button-group' }, [
+    h('div', { className: 'panel-footer' }, [
       h('button', { className: 'button button-success', onClick: handleCorrect }, '正确'),
       h('button', { className: 'button button-danger', onClick: handleSkip }, '跳过'),
     ])
