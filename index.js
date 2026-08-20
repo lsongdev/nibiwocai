@@ -104,7 +104,7 @@ const App = () => {
     h('div', { className: 'game-card-body' }, [
       h('div', null, [
         h('h3', null, "选择词库"),
-        h('select', { name: 'dict' }, [
+        h('select', { name: 'dict', className: 'select width-full' }, [
           h('option', { value: 'default' }, '默认词库'),
           h('option', { value: 'chengyu' }, '成语大全'),
           h('option', { value: 'richang' }, '日常词汇'),
