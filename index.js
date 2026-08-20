@@ -66,16 +66,16 @@ const Game = ({ config }) => {
       wakeLockRef.current?.release();
     };
   }, []);
-  return h('div', { className: 'panel' }, [
-    h('h2', { className: 'panel-header' }, [
+  return h('div', { className: 'game-card card' }, [
+    h('h2', { className: 'game-card-header' }, [
       h('span', null, "你比我猜"),
       h('small', null, formatTime(t)),
       h('small', null, `${o}/${n}`),
     ]),
-    h('div', { className: 'panel-body' }, [
+    h('div', { className: 'game-card-body' }, [
       h('b', { className: "game-word" }, word),
     ]),
-    h('div', { className: 'panel-footer' }, [
+    h('div', { className: 'game-card-footer' }, [
       h('button', { className: 'button button-success', onClick: handleCorrect }, '正确'),
       h('button', { className: 'button button-danger', onClick: handleSkip }, '跳过'),
     ])
@@ -97,11 +97,11 @@ const App = () => {
     gyroscope.enable();
   };
   if (config) return h(Game, { config });
-  return h('form', { className: 'panel', onSubmit: handleSubmit }, [
-    h('h2', { className: 'panel-header' }, [
+  return h('form', { className: 'game-card card', onSubmit: handleSubmit }, [
+    h('h2', { className: 'game-card-header' }, [
       h('span', null, "你比我猜"),
     ]),
-    h('div', { className: 'panel-body' }, [
+    h('div', { className: 'game-card-body' }, [
       h('div', null, [
         h('h3', null, "选择词库"),
         h('select', { name: 'dict' }, [
@@ -118,7 +118,7 @@ const App = () => {
         ])),
       ])
     ]),
-    h('div', { className: 'panel-footer' }, [
+    h('div', { className: 'game-card-footer' }, [
       h('button', { className: 'button button-success', type: 'submit' }, '开始'),
     ])
   ]);

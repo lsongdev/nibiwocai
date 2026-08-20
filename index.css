@@ -1,36 +1,30 @@
 @import url(https://lsong.org/css/stylesheet.css?v=6);
 
 :root {
-  --game-accent: #6d3df5;
+  --game-accent: var(--color-primary);
   --game-success: #16803c;
   --game-danger: #c43d4b;
 }
 
-body { min-width: 320px; color: var(--color-text); background: radial-gradient(circle at 50% -10%, color-mix(in srgb, var(--game-accent) 11%, var(--color-canvas)), var(--color-canvas) 45%); }
-.navbar { position: sticky; top: 0; z-index: 5; padding-block: 14px; border-bottom: 1px solid var(--color-border); background: color-mix(in srgb, var(--color-canvas) 88%, transparent); backdrop-filter: blur(14px); }
-.navbar > hr, .footer > hr { display: none; }
-.navbar-brand .logo { width: 22px; height: 22px; }
-.navbar nav { gap: 16px; }
-.navbar nav a { color: var(--color-text-muted); font-size: 13px; text-decoration: none; }
-.navbar nav a:hover, .navbar nav a:focus-visible { color: var(--game-accent); }
+body { min-width: 320px; color: var(--color-text); background: var(--color-canvas); }
 .content { padding-block: clamp(36px, 7vw, 82px) clamp(64px, 10vw, 120px); }
 #hello { max-width: 680px; padding-bottom: 42px; }
 #hello h2 { margin-bottom: 12px; font-size: clamp(32px, 5vw, 52px); letter-spacing: -0.06em; }
 #hello .headline { margin: 0; color: var(--color-text-muted); font-size: 16px; line-height: 1.7; }
-#hello a, .footer a { color: var(--game-accent); }
+#hello a { color: var(--game-accent); }
 #app { min-height: 500px; }
-.panel { width: min(100%, 760px); min-height: 500px; padding: clamp(22px, 5vw, 52px); margin: 0 auto; border: 1px solid var(--color-border); border-radius: 24px; background: color-mix(in srgb, var(--color-surface) 94%, transparent); box-shadow: 0 22px 70px rgb(17 17 19 / 8%); }
-.panel-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 0; font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.045em; }
-.panel-header small { padding: 6px 9px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-muted); font-size: 12px; font-weight: 600; letter-spacing: 0; }
-.panel-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 52px 0; }
-.panel-body > div { width: min(100%, 360px); }
-.panel-body h3 { margin: 22px 0 9px; font-size: 14px; color: var(--color-text-muted); }
-.panel-body h3:first-child { margin-top: 0; }
-.panel-body select { width: 100%; min-height: 44px; padding-inline: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); }
-.panel-body label { display: inline-flex; align-items: center; gap: 7px; margin: 4px 12px 0 0; color: var(--color-text-muted); font-size: 14px; }
-.panel-body input[type="radio"] { accent-color: var(--game-accent); }
-.panel-footer { display: flex; justify-content: center; gap: 12px; padding-top: 8px; }
-.panel-footer .button { min-width: 112px; border-radius: 12px; }
+.game-card { --card-padding: clamp(22px, 5vw, 52px); --card-shadow: none; display: flex; width: 100%; min-height: 500px; margin: 0; flex-direction: column; }
+.game-card-header { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 0; font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.045em; }
+.game-card-header small { padding: 6px 9px; border: 1px solid var(--color-border); border-radius: 999px; color: var(--color-text-muted); font-size: 12px; font-weight: 600; letter-spacing: 0; }
+.game-card-body { flex: 1; display: flex; align-items: center; justify-content: center; padding: 52px 0; }
+.game-card-body > div { width: 100%; }
+.game-card-body h3 { margin: 22px 0 9px; font-size: 14px; color: var(--color-text-muted); }
+.game-card-body h3:first-child { margin-top: 0; }
+.game-card-body select { width: 100%; min-height: 44px; padding-inline: 12px; border: 1px solid var(--color-border); border-radius: var(--radius-md); background: var(--color-surface); color: var(--color-text); }
+.game-card-body label { display: inline-flex; align-items: center; gap: 7px; margin: 4px 12px 0 0; color: var(--color-text-muted); font-size: 14px; }
+.game-card-body input[type="radio"] { accent-color: var(--game-accent); }
+.game-card-footer { display: flex; justify-content: center; gap: 12px; padding-top: 8px; }
+.game-card-footer .button { min-width: 112px; border-radius: 12px; }
 .button-success { background: var(--game-success); }
 .button-danger { background: var(--game-danger); }
 .game-word { display: block; max-width: 100%; overflow-wrap: anywhere; color: var(--color-text); font-size: clamp(54px, 15vw, 170px); font-weight: 750; line-height: .95; letter-spacing: -0.08em; }
@@ -40,31 +34,21 @@ body { min-width: 320px; color: var(--color-text); background: radial-gradient(c
 .subscribe p { margin: 0 0 18px; color: var(--color-text-muted); }
 .subscribe form { display: flex; gap: 8px; }
 .subscribe .input { min-width: 0; flex: 1; }
-.footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; padding-block: 28px 42px; border-top: 1px solid var(--color-border); color: var(--color-text-muted); font-size: 13px; }
-
 @media (orientation: landscape) and (max-width: 900px) {
   html, body { overflow: hidden; }
   .navbar, #hello, #subscribe, .footer { display: none !important; }
   .content { width: 100%; padding: 10px; }
-  #app, .panel { min-height: calc(100vh - 20px); height: calc(100vh - 20px); }
-  .panel { padding: 18px 28px; border-radius: 18px; }
-  .panel-body { padding: 18px 0; }
+  #app, .game-card { min-height: calc(100vh - 20px); height: calc(100vh - 20px); }
+  .game-card { --card-padding: 18px 28px; }
+  .game-card-body { padding: 18px 0; }
   .game-word { font-size: clamp(52px, 14vh, 130px); }
 }
 
 @media (max-width: 640px) {
-  .navbar { position: static; }
-  .navbar nav { gap: 10px; overflow-x: auto; }
-  .navbar nav a:nth-child(n + 4) { display: none; }
-  .panel { min-height: 520px; }
-  .panel-header { flex-wrap: wrap; }
-  .panel-header span { width: 100%; }
-  .panel-body { padding: 36px 0; }
-  .panel-footer .button { flex: 1; min-width: 0; }
+  .game-card { min-height: 520px; }
+  .game-card-header { flex-wrap: wrap; }
+  .game-card-header span { width: 100%; }
+  .game-card-body { padding: 36px 0; }
+  .game-card-footer .button { flex: 1; min-width: 0; }
   .subscribe form { flex-direction: column; }
-  .footer { align-items: flex-start; flex-direction: column; }
-}
-
-@media (prefers-color-scheme: dark) {
-  .panel { box-shadow: 0 22px 70px rgb(0 0 0 / 28%); }
 }
