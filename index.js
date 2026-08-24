@@ -1,21 +1,14 @@
-import { ready } from 'https://lsong.org/scripts/dom.js';
-import { range } from 'https://lsong.org/scripts/math.js';
-import { shuffle } from 'https://lsong.org/scripts/array.js';
-import { serialize } from 'https://lsong.org/scripts/form.js';
-import { gyroscope } from 'https://lsong.org/scripts/motion.js';
+import { ready } from 'https://lsong.org/scripts/dom/index.js';
+import { shuffled } from 'https://lsong.org/scripts/array/random.js';
+import { formToObject } from 'https://lsong.org/scripts/dom/form-data.js';
+import { observeOrientation, requestOrientationPermission } from 'https://lsong.org/scripts/devices/orientation.js';
+import { formatTime } from 'https://lsong.org/scripts/datetime/format.js';
 import { h, render, useState, useEffect, useRef, useThrottle } from 'https://lsong.org/scripts/react/index.js?v1';
 
 const loadData = async name => {
   const res = await fetch(`data/${name}.json`);
   const data = await res.json();
-  return shuffle(data);
-};
-
-const formatTime = s => {
-  const t = Math.max(0, s);
-  const m = Math.floor(t / 60);
-  const sec = t % 60;
-  return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+  return shuffled(data);
 };
 
 const Game = ({ config }) => {
@@ -51,12 +44,12 @@ const Game = ({ config }) => {
   const handleCorrect = () => next(true);
   useEffect(() => {
     init();
-    const cancel = gyroscope.addListener('change', ({ x }) => {
-      if (gyroscope.portrait) return
-      if (range(x, -45, -30)) {
+    const cancel = observeOrientation(({ gamma: x }) => {
+      if (matchMedia('(orientation: portrait)').matches) return;
+      if (x >= -45 && x <= -30) {
         handleSkip();
       }
-      if (range(x, 45, 50)) {
+      if (x >= 45 && x <= 50) {
         handleCorrect();
       }
     });
@@ -92,9 +85,10 @@ const App = () => {
   const [config, setConfig] = useState(null);
   const handleSubmit = async e => {
     e.preventDefault();
-    const conf = serialize(e.target);
+    const conf = formToObject(e.target);
+    conf.time = Number(conf.time);
     setConfig(conf);
-    gyroscope.enable();
+    requestOrientationPermission().catch(() => {});
   };
   if (config) return h(Game, { config });
   return h('form', { className: 'game-card card', onSubmit: handleSubmit }, [
